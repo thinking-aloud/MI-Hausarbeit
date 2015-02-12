@@ -115,27 +115,82 @@ Die Ausarbeitung befasst sich mit der Beschreibung solcher Problemstellungen und
 
 \section{Einleitung}
 Das Finden von Informationen zur Entscheidungsfindung war noch bis vor ein paar Jahren eine aufwendige Aufgabe. Um ein umfassendes Bild über eine Personengruppe oder eine einzelne Person zu erlangen mussten eine Vielzahl von Quellen ausgewertet werden. Der Vorgang war zeitintensiv und somit teuer.\\
-Durch die alltäglichen Nutzung des Internets durch Millionen von Personen hat sich das Bild gewandelt. Es ist mittlerweile möglich Daten massenhaft zu speichern und auszuwerten. Die Qualität der Daten hat mit dieser neuen Methode jedoch massiv abgenommen. Dies ergibt sich daraus, dass jeder Benutzer beliebige Daten im Netz über sich streuen kann. Um Die Daten auswerten zu können müssen diese vergleichbar gemacht werden. Dennoch muss bedacht werden, dass Ergebnisse aus einer derartigen elektronischen Auswertung niemals zu 100\% korrekt sein können.
+Durch die alltäglichen Nutzung des Internets durch Millionen von Personen hat sich das Bild gewandelt. Es ist mittlerweile möglich Daten massenhaft zu speichern und auszuwerten. Die Qualität der gesammelten Daten hat mit dieser neuen Methode jedoch massiv abgenommen. Dies ergibt sich daraus, dass jeder Benutzer beliebige Daten im Netz über sich streuen kann. Um Die Daten auswerten zu können müssen diese vergleichbar gemacht werden. Außerdem muss bedacht werden, dass Ergebnisse aus einer derartigen elektronischen Auswertung niemals zu 100\% korrekt sein können.
 
 \section{Vergleichbare Arbeiten}
 \cite{challanges_in_osint}
 \enquote{Challenges in Open Source Intelligence}\\
-Beschreibt allgemeine Schwierigkeiten bei OSINT.\par
+Beschreibt allgemeine Schwierigkeiten bei OSINT. Der Schwerpunkt liegt bei dieser Arbeit auf der Filterung von erhobenen Daten um diese nutzbar zu machen.\par
 
 \noindent\cite{challenges_to_automated_alloegory}
 \enquote{Challenges to Automated Allegory Resolution in Open Source Intelligence}\\
-Beschreibt Probleme bei der Auswertung von Sprache\par
+Die Arbeit befasst sich insbesondere mit Problemen bei der Auswertung von Sprache an konkreten Beispielen.\par
 
 \noindent\cite{development_of_a_hybrid_decision_system}
 \enquote{Development of a Hybrid Decision Support System for intelligence analysis}\\
-Beschreibt ... \par 
+Im Gegensatz zu den übrigen Arbeiten befasst diese sich nicht mit dem Versuch Analyse nach Möglichkeit zu automatisieren. Stattdessen wird OSINT als Werkzeug, welches dem Analysten Hilfestellungen liefert begriffen. \par 
 
 \noindent\cite{data_consolidation_solution}
 \enquote{Data consolidation solution for internal security needs}\\
-Beschreibt ... .
+In der Arbeit wird der Einsatz in Indien beschrieben. Der Fokus liegt in dem Versuch alltägliche Abläufe in der Gesellschaft zu optimieren.
+
+\section{Datensammlung}
+Das Sammeln von Daten für die Durchführung von OSINT unterscheidet sich maßgeblich im Vergleich zu klassischen Verfahren. Der folgenden Abschnitte beleuchten diese Unterschiede, da sie für die Art der Nutzung von Bedeutung sind.
+
+\subsection{klassische Datensammlung}
+Bei der klassische Gewinnung von Daten wird die Erhebung manuell durchgeführt. Es ist somit möglich, beliebige Quellen zu nutzen, z.B. Zeitungsartikel, handschriftliche Notizen, Tonaufnahmen oder mündliche Aussagen von Personen.\\
+Die klassische Datensammlung geschieht mit dem Ziel, bestimmte Informationen heraus zu finden oder einen sehr speziellen Themenkomplex zu erschließen. Für diese Art der Datensammlung können jegliche Art von Daten genutzt werden, da eine manuelle Zusammenführung von Personen getätigt wird.
+
+\subsection{automatisierte Datensammlung}
+Beim OSINT werden die Daten zum größten Teil maschinell ausgewertet. Möglich ist eine solche Auswertung durch die gesellschaftlichen Veränderungen, die uns das WEB 2.0 gebracht hat. \\
+Seit ein paar Jahren kommunizieren wir mit zunehmendem Maße schriftlich, digital und häufig öffentlich. 
+OSINT macht sich diese Tatsache zu Nutzen. Es erfasst und wertet Daten aus Social Media Plattformen wie Twitter, Facebook und Blogs und anderen frei zugänglichen Quellen aus.\\
+Da dies Auswertung automatisiert vorgenommen wird, ist die Verarbeitung von großen Mengen an Daten möglich.
+ 
+\subsection{Vergleich}
+Wie aus Tabelle~\ref{tab:Vergleich} zu ersehen ist, eignet sich OSINT insbesondere dann, wenn viele Daten betroffen sind und keine hohe Korrektheit der Daten von Nöten ist.
+
+\begin{table}[htdp]
+  \caption{\it Vergleich von klassischer und digitaler Informationsgewinnung mittels OSINT}
+  \begin{center}
+    \begin{tabular}{|c|c|c|}\hline
+      Bereich & klassisch & OSINT \\\hline
+      Aufwand der Erhebung (einmalig)	& höher & niedriger\\
+      Skalierbarkeit der Erhebung 		& schlechter & besser\\
+      Aufwand der Auswertung (einmalig) 	& hoch & hoch\\
+	  Skalierbarkeit der Auswertung 		& schlechter & besser\\
+	  Qualität der Auswertung 			& höher & niedriger\\	  
+     \hline
+    \end{tabular}
+  \end{center}
+  \label{tab:Vergleich}
+\end{table}
+
+\section{Datenbereinigung}
+Gesammelte OSINT Daten enthalten eine Vielzahl von Fehlern. Hierzu gehören: Unterschiedliche Schreibweise von Wörtern, Dopplungen, sowie Widersprüche. \cite{data_consolidation_solution} unterteilt diese in 4 Phasen.
+
+\subsection{Untersuchung}
+In dieser Phase werden allgemeine Fehler auf Basis von Querreferenzierung und Plausibilitätsüberprüfung gefunden und entfernt. \\
+\textbf{Bsp}. \{Teststrasse, Test Straße, Teststr.\} -> \{Teststrasse, Teststrasse, Teststrasse\}
+
+\subsection{Standarisierung}
+Anschließend werden die Daten in ein einheitliches Format gebracht um sie effizient durchsuchen zu können. Zudem werden Rechtschreibfehler korrigiert. \\
+\textbf{Bsp}.: \{Teststrasse, Teststrasse, Teststrasse\} -> \{Teststraße, Teststraße, Teststraße\}.
+
+\subsection{Beseitigung von Dopplungen}
+In der 3. Phase werden redundante Daten entfernt. Hierbei werden ähnliche Daten zunächst in einem Block zusammengefasst, wodurch die Effizienz der Abgleichung erheblich erhöht werden kann. Im 2. Schritt werden identische Daten pro Block zusammengefasst.\\
+\textbf{Bsp}.: \{Teststraße, Teststraße, Teststraße\} -> Teststraße
+
+\subsection{Domain Phase}
+%Daten werden nach Regeln für die Domaine gefiltert
+Im letzten Schritt werden auf Basis von Domainwissen 
+werden Daten durch Domainexperten gefiltert
+
+\section{Auswertung}
 
 
-\section{Hauptteil}
+
+\section{Kritik an OSINT}
 
 
 
