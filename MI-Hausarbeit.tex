@@ -113,6 +113,7 @@ Im Gegensatz zu klassischen Aggregierungsmethoden ist die Beschaffung einer ausr
 Die Ausarbeitung befasst sich mit der Beschreibung solcher Problemstellungen und nennt verschiedene Lösungsansätze.
 \end{abstract}
 
+
 \section{Einleitung}
 Das Finden von Informationen zur Entscheidungsfindung war noch bis vor ein paar Jahren eine aufwendige Aufgabe. Um ein umfassendes Bild über eine Personengruppe oder eine einzelne Person zu erlangen mussten eine Vielzahl von Quellen ausgewertet werden. Der Vorgang war zeitintensiv und somit teuer.\\
 Durch die alltäglichen Nutzung des Internets durch Millionen von Personen hat sich das Bild gewandelt. Es ist mittlerweile möglich Daten massenhaft zu speichern und auszuwerten. Die Qualität der gesammelten Daten hat mit dieser neuen Methode jedoch massiv abgenommen. Dies ergibt sich daraus, dass jeder Benutzer beliebige Daten im Netz über sich streuen kann. Um Die Daten auswerten zu können müssen diese vergleichbar gemacht werden. Außerdem muss bedacht werden, dass Ergebnisse aus einer derartigen elektronischen Auswertung niemals zu 100\% korrekt sein können.
@@ -120,19 +121,20 @@ Durch die alltäglichen Nutzung des Internets durch Millionen von Personen hat s
 \section{Vergleichbare Arbeiten}
 \cite{challanges_in_osint}
 \enquote{Challenges in Open Source Intelligence}\\
-Beschreibt allgemeine Schwierigkeiten bei OSINT. Der Schwerpunkt liegt bei dieser Arbeit auf der Filterung von erhobenen Daten um diese nutzbar zu machen.\par
+Beschreibt allgemeine Schwierigkeiten bei OSINT. Der Schwerpunkt liegt bei dieser Arbeit auf der Filterung von erhobenen Daten um diese nutzbar zu machen.\vspace{2mm}
 
 \noindent\cite{challenges_to_automated_alloegory}
 \enquote{Challenges to Automated Allegory Resolution in Open Source Intelligence}\\
-Die Arbeit befasst sich insbesondere mit Problemen bei der Auswertung von Sprache an konkreten Beispielen.\par
+Die Arbeit befasst sich insbesondere mit Problemen bei der Auswertung von Sprache an konkreten Beispielen.\vspace{2mm}
 
 \noindent\cite{development_of_a_hybrid_decision_system}
 \enquote{Development of a Hybrid Decision Support System for intelligence analysis}\\
-Im Gegensatz zu den übrigen Arbeiten befasst diese sich nicht mit dem Versuch Analyse nach Möglichkeit zu automatisieren. Stattdessen wird OSINT als Werkzeug, welches dem Analysten Hilfestellungen liefert begriffen. \par 
+Im Gegensatz zu den übrigen Arbeiten befasst diese sich nicht mit dem Versuch Analyse nach Möglichkeit zu automatisieren. Stattdessen wird OSINT als Werkzeug, welches dem Analysten Hilfestellungen liefert begriffen. \vspace{2mm}
 
 \noindent\cite{data_consolidation_solution}
 \enquote{Data consolidation solution for internal security needs}\\
 In der Arbeit wird der Einsatz in Indien beschrieben. Der Fokus liegt in dem Versuch alltägliche Abläufe in der Gesellschaft zu optimieren.
+
 
 \section{Datensammlung}
 Das Sammeln von Daten für die Durchführung von OSINT unterscheidet sich maßgeblich im Vergleich zu klassischen Verfahren. Der folgenden Abschnitte beleuchten diese Unterschiede, da sie für die Art der Nutzung von Bedeutung sind.
@@ -166,28 +168,63 @@ Wie aus Tabelle~\ref{tab:Vergleich} zu ersehen ist, eignet sich OSINT insbesonde
   \label{tab:Vergleich}
 \end{table}
 
+
 \section{Datenbereinigung}
-Gesammelte OSINT Daten enthalten eine Vielzahl von Fehlern. Hierzu gehören: Unterschiedliche Schreibweise von Wörtern, Dopplungen, sowie Widersprüche. \cite{data_consolidation_solution} unterteilt diese in 4 Phasen.
+Gesammelte OSINT Daten enthalten eine Vielzahl von Fehlern. Hierzu gehören: Unterschiedliche Schreibweise von Wörtern, Dopplungen, sowie Widersprüche. Nach  \cite{data_consolidation_solution} gibt es die folgenden Phasen.
 
 \subsection{Untersuchung}
 In dieser Phase werden allgemeine Fehler auf Basis von Querreferenzierung und Plausibilitätsüberprüfung gefunden und entfernt. \\
 \textbf{Bsp}. \{Teststrasse, Test Straße, Teststr.\} -> \{Teststrasse, Teststrasse, Teststrasse\}
 
-\subsection{Standarisierung}
+\subsection{Standardisierung}
+\label{Standardisierung}
 Anschließend werden die Daten in ein einheitliches Format gebracht um sie effizient durchsuchen zu können. Zudem werden Rechtschreibfehler korrigiert. \\
 \textbf{Bsp}.: \{Teststrasse, Teststrasse, Teststrasse\} -> \{Teststraße, Teststraße, Teststraße\}.
 
 \subsection{Beseitigung von Dopplungen}
+\label{Dopplungen}
 In der 3. Phase werden redundante Daten entfernt. Hierbei werden ähnliche Daten zunächst in einem Block zusammengefasst, wodurch die Effizienz der Abgleichung erheblich erhöht werden kann. Im 2. Schritt werden identische Daten pro Block zusammengefasst.\\
 \textbf{Bsp}.: \{Teststraße, Teststraße, Teststraße\} -> Teststraße
 
 \subsection{Domain Phase}
-%Daten werden nach Regeln für die Domaine gefiltert
-Im letzten Schritt werden auf Basis von Domainwissen 
-werden Daten durch Domainexperten gefiltert
+Im letzten Schritt werden die gesammelten Daten auf Basis von Domainwissen gefiltert und Themenbereichen zugewiesen. Dies wird im folgenden Abschnitt näher beschrieben.
 
-\section{Auswertung}
 
+\section{Zuordnung der OSINT Daten}
+Die gesammelten OSINT Daten wurden bereinigt und normalisiert. Um sie effizient nutzen zu können ist es notwendig eine Zuordnung durchzuführen. Dies geschieht auf verschiedenen Ebenen.
+
+\subsection{Thema}
+Bedeutungen von Aussagen können in Bezug auf den Kontext in dem sie verwendet werden variieren. Um eine korrekte Aussage über die Bedeutung einer Aussage, oder eines Textes zu treffen, ist es somit notwendig, den Kontext zu bestimmen.\\
+Bei vielen Themengebieten ist es zudem von Nöten, eine sprachabhängige Zuordnung durchzuführen. Dies ist notwendig, da in verschiedenen Ländern zu einem Themenkomplex ein anderer \enquote{Major consensus narrative}\footnotemark vorherrschen kann.\\
+\noindent Eine thematische Zuordnung kann durch den Einsatz von mehrsprachigen Stichwortlisten geschehen. Bei diesem Ansatz hat jedes bekannte Themengebiet Stichworte, die in einer bestimmten Reihenfolge zu einem gewichteten Ergebnis führen. Hierdurch wird die Wahrscheinlichkeit gemessen, zu der ein Text zu einem Thema gehört.\\
+Alternativ gibt es die Möglichkeit die Themenzugehörigkeit mit Hilfe von linearer Algebra zu ermitteln.
+
+\footnotetext{Dieser wird von Bruce Sterling\cite{sterling2001zeitgeist} als das beschrieben, was eine Personengruppe über ein Thema als wahr annimmt. Diese Wahrheit basiert auf dem erlebten und muss nicht zwangsläufig mit den Fakten übereinstimmen.\\
+Bsp.: Die gegenläufige Wahrnehmung Europas und Russlands zu dem Krieg in der Ukraine}
+
+\subsection{Geografische Position}
+Um eine bessere Thematische Zuordnung durchführen zu können, ist es hilfreich den Aufenthaltsort des Verfassers einer Nachricht zu ermitteln. Dies ist allerdings weniger trivial, als man zunächst annehmen würde.\\
+\noindent Ein Grund hierfür ist, dass Orte häufig abgekürzt werden, oder unterschiedliche Schreibweisen haben. Hamburg kann z.B. HH abgekürzt werden und München wird im englischen \enquote{Munich} geschrieben. Orte müssen daher, wie in \ref{Standardisierung} beschrieben, mit Hilfe einer Fuzzysuche angeglichen werden.\\
+Erschwerend kommt hinzu, dass ein genannter Ort nicht zwangsläufig der Aufenthaltsort des Verfassers sein muss. In einigen Fällen kann der Aufenthaltsort aus Zusatzdaten ausgelesen werden. Dies könnte beispielsweise eine Twitter Nachricht mit Bild, das eine Georeferenzierung beinhaltet sein.\\
+Wenn keine derartige Datenquelle verfügbar ist, muss der Aufenthaltsort aus dem Kontext gelesen werden. Dies erfordert jedoch abhängig von dem Thema ein entsprechend gute thematische Kenntnis. Verbessert werden kann eine derartige geografische Positionsbestimmung bei vielen Nachrichten zum gleichen Thema. 
+
+\subsection{Namen (Named Entity Recognition (NER))}
+Um Texte und Aussagen einer Person zuordnen zu können ist es notwendig Namen in Texten zu erkennen und diese als Identität wieder zu erkennen. Dies wird \enquote{Named Entity Recognition (NER)} genannt. Bei der NER gibt es zwei wesentliche Vorgehensweisen. \\
+Einerseits ist es Möglich Namen anhand von bestehenden Listen zu erkennen und zuzuordnen.\\
+Die andere Möglichkeit ist, Namen anhand von Mustern auszumachen. Z.B. [Anrede] [groß geschrieben] [groß geschrieben] oder [Title] von [Ort]. Bei diesem vorgehen kann eine ungefähre Genauigkeit von 80 Prozent\cite{challanges_in_osint} erreicht werden. Sprachen, die abgesehen von Eigennamen alles klein schreiben wie z.B. Englisch erreichen die besten Erkennungsraten. Sprachen, die Nomen groß schreiben, wie es im Deutschen der Fall ist, erreichen entsprechend schlechtere Ergebnisse. Probleme gibt es bei Sprachen, die keine lateinischen Zeichen verwenden (z.B.: russisch oder chinesisch) und Sprachen, in denen Namen nicht in den Kategorien Vorname und Nachname ausgedrückt werden.
+
+\subsection{Beziehungen}
+Beziehungen werden in den Kategorien quantitativ und qualifiziert angegeben.\\
+quantitative Beziehung sagen aus, wer wen kennt (Bsp. A kennt B). Eine qualitative Aussage über eine Beziehung zu geben ist relativ einfach. Es bedarf jedoch einer umfangreichen Datenmenge und Zusatzinformationen zu den betroffenen Personen um einen Informationsgewinn zu liefern. Wenn diese Voraussetzungen erfüllt sind, entsteht ein Beziehungskonstrukt. Dieses erlaubt Schlüsse darüber, in welchen Kreisen sich eine Person bewegt.\\
+Die qualifizierte Beziehung beschreibt die Art und Intensität des Verhältnisses von Personen (Bsp. A ist verheiratet mit B; A ist befreundet mit C). Ähnlich wie bei der Georeferenzierung ist es bei den qualifizierten Beziehungen schwierig korrekte Informationen zu erlangen. \\
+Dies liegt zum einen daran, dass die Daten nur mit einer umfangreichen Textanalyse durchgeführt werden können. Dessen Komplexität steigt mit der Detailtiefe der Beziehung. So wird A B niemals mit "hallo meine Ehefrau B" ansprechen. Zur Erlangung derartiger Informationen können Daten wie der gemeinsame Nachname in Kombination mit übereinstimmenden Adressdaten dienen.\\
+Ein weiterer Grund für den erschwerten Umgang mit qualifizierten Beziehungsdaten ist, dass sich diese ändern können. Personen, die beispielsweise Arbeitskollegen waren könnten eine Beziehung eingehen, was zu Fehlern bei Auswertungen führt.\\
+Eine qualifizierte Beziehungsanalyse erfordert einen größeren Aufwand, liefert jedoch bessere Ergebnisse.
+
+\subsection{Ereignisse}
+Um eine Quelle besser nutzen zu können ist es von Vorteil diese einem Ereignis zuordnen zu können. Hierzu ist es wichtig Ereignisse zu erkennen und diese voneinander zu unterscheiden. Ereignisse mit vielen Quellen werden im allgemeinen als wichtig angesehen. Die Erkennung von Dopplungen, wie in Abschnitt \ref{Dopplungen} beschrieben ist hierbei besonders wichtig.\\
+Zur Erkennung, ob und wie gut ein Dokument in einen Themenbereich passt werden Texte mit Stichworten versehen. Stichwörter sind Wörter mit dem geringsten Informationsgehalt. Das ganze Dokument wird bei diesem Ansatz als Vektor dargestellt. Jedes Stichwort ist eine Dimension in dem Vektor. Die Werte der Dimension ist die Anzahl, die das Wort vorgekommen ist.\\
+Mit dieser Vorgehensweise wird ein Cluster aus Texten erstellt. Das Dokument im Zentrum des Clusters ist das, für das Themengebiet typischste Dokument.
 
 
 \section{Kritik an OSINT}
