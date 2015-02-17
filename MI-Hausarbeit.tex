@@ -177,12 +177,12 @@ In dieser Phase werden allgemeine Fehler auf Basis von Querreferenzierung und Pl
 \textbf{Bsp}. \{Teststrasse, Test Straße, Teststr.\} -> \{Teststrasse, Teststrasse, Teststrasse\}
 
 \subsection{Standardisierung}
-\label{Standardisierung}
+\label{sub:Standardisierung}
 Anschließend werden die Daten in ein einheitliches Format gebracht um sie effizient durchsuchen zu können. Zudem werden Rechtschreibfehler korrigiert. \\
 \textbf{Bsp}.: \{Teststrasse, Teststrasse, Teststrasse\} -> \{Teststraße, Teststraße, Teststraße\}.
 
 \subsection{Beseitigung von Dopplungen}
-\label{Dopplungen}
+\label{sub:Dopplungen}
 In der 3. Phase werden redundante Daten entfernt. Hierbei werden ähnliche Daten zunächst in einem Block zusammengefasst, wodurch die Effizienz der Abgleichung erheblich erhöht werden kann. Im 2. Schritt werden identische Daten pro Block zusammengefasst.\\
 \textbf{Bsp}.: \{Teststraße, Teststraße, Teststraße\} -> Teststraße
 
@@ -199,19 +199,19 @@ Bei vielen Themengebieten ist es zudem von Nöten, eine sprachabhängige Zuordnu
 \noindent Eine thematische Zuordnung kann durch den Einsatz von mehrsprachigen Stichwortlisten geschehen. Bei diesem Ansatz hat jedes bekannte Themengebiet Stichworte, die in einer bestimmten Reihenfolge zu einem gewichteten Ergebnis führen. Hierdurch wird die Wahrscheinlichkeit gemessen, zu der ein Text zu einem Thema gehört.\\
 Alternativ gibt es die Möglichkeit die Themenzugehörigkeit mit Hilfe von linearer Algebra zu ermitteln.
 
-\footnotetext{Dieser wird von Bruce Sterling\cite{sterling2001zeitgeist} als das beschrieben, was eine Personengruppe über ein Thema als wahr annimmt. Diese Wahrheit basiert auf dem erlebten und muss nicht zwangsläufig mit den Fakten übereinstimmen.\\
+\footnotetext{Dieser wird von Bruce Sterling \cite{sterling2001zeitgeist} als das beschrieben, was eine Personengruppe über ein Thema als wahr annimmt. Diese Wahrheit basiert auf dem erlebten und muss nicht zwangsläufig mit den Fakten übereinstimmen.\\
 Bsp.: Die gegenläufige Wahrnehmung Europas und Russlands zu dem Krieg in der Ukraine}
 
 \subsection{Geografische Position}
 Um eine bessere Thematische Zuordnung durchführen zu können, ist es hilfreich den Aufenthaltsort des Verfassers einer Nachricht zu ermitteln. Dies ist allerdings weniger trivial, als man zunächst annehmen würde.\\
-\noindent Ein Grund hierfür ist, dass Orte häufig abgekürzt werden, oder unterschiedliche Schreibweisen haben. Hamburg kann z.B. HH abgekürzt werden und München wird im englischen \enquote{Munich} geschrieben. Orte müssen daher, wie in \ref{Standardisierung} beschrieben, mit Hilfe einer Fuzzysuche angeglichen werden.\\
+\noindent Ein Grund hierfür ist, dass Orte häufig abgekürzt werden, oder unterschiedliche Schreibweisen haben. Hamburg kann z.B. HH abgekürzt werden und München wird im englischen \enquote{Munich} geschrieben. Orte müssen daher, wie in \ref{sub:Standardisierung} beschrieben, mit Hilfe einer Fuzzysuche angeglichen werden.\\
 Erschwerend kommt hinzu, dass ein genannter Ort nicht zwangsläufig der Aufenthaltsort des Verfassers sein muss. In einigen Fällen kann der Aufenthaltsort aus Zusatzdaten ausgelesen werden. Dies könnte beispielsweise eine Twitter Nachricht mit Bild, das eine Georeferenzierung beinhaltet sein.\\
 Wenn keine derartige Datenquelle verfügbar ist, muss der Aufenthaltsort aus dem Kontext gelesen werden. Dies erfordert jedoch abhängig von dem Thema ein entsprechend gute thematische Kenntnis. Verbessert werden kann eine derartige geografische Positionsbestimmung bei vielen Nachrichten zum gleichen Thema. 
 
 \subsection{Namen (Named Entity Recognition (NER))}
 Um Texte und Aussagen einer Person zuordnen zu können ist es notwendig Namen in Texten zu erkennen und diese als Identität wieder zu erkennen. Dies wird \enquote{Named Entity Recognition (NER)} genannt. Bei der NER gibt es zwei wesentliche Vorgehensweisen. \\
 Einerseits ist es Möglich Namen anhand von bestehenden Listen zu erkennen und zuzuordnen.\\
-Die andere Möglichkeit ist, Namen anhand von Mustern auszumachen. Z.B. [Anrede] [groß geschrieben] [groß geschrieben] oder [Title] von [Ort]. Bei diesem vorgehen kann eine ungefähre Genauigkeit von 80 Prozent\cite{challanges_in_osint} erreicht werden. Sprachen, die abgesehen von Eigennamen alles klein schreiben wie z.B. Englisch erreichen die besten Erkennungsraten. Sprachen, die Nomen groß schreiben, wie es im Deutschen der Fall ist, erreichen entsprechend schlechtere Ergebnisse. Probleme gibt es bei Sprachen, die keine lateinischen Zeichen verwenden (z.B.: russisch oder chinesisch) und Sprachen, in denen Namen nicht in den Kategorien Vorname und Nachname ausgedrückt werden.
+Die andere Möglichkeit ist, Namen anhand von Mustern auszumachen. Z.B. [Anrede] [groß geschrieben] [groß geschrieben] oder [Title] von [Ort]. Bei diesem vorgehen kann eine ungefähre Genauigkeit von 80 Prozent \cite{challanges_in_osint} erreicht werden. Sprachen, die abgesehen von Eigennamen alles klein schreiben wie z.B. Englisch erreichen die besten Erkennungsraten. Sprachen, die Nomen groß schreiben, wie es im Deutschen der Fall ist, erreichen entsprechend schlechtere Ergebnisse. Probleme gibt es bei Sprachen, die keine lateinischen Zeichen verwenden (z.B.: russisch oder chinesisch) und Sprachen, in denen Namen nicht in den Kategorien Vorname und Nachname ausgedrückt werden.
 
 \subsection{Beziehungen}
 Beziehungen werden in den Kategorien quantitativ und qualifiziert angegeben.\\
@@ -219,12 +219,136 @@ quantitative Beziehung sagen aus, wer wen kennt (Bsp. A kennt B). Eine qualitati
 Die qualifizierte Beziehung beschreibt die Art und Intensität des Verhältnisses von Personen (Bsp. A ist verheiratet mit B; A ist befreundet mit C). Ähnlich wie bei der Georeferenzierung ist es bei den qualifizierten Beziehungen schwierig korrekte Informationen zu erlangen. \\
 Dies liegt zum einen daran, dass die Daten nur mit einer umfangreichen Textanalyse durchgeführt werden können. Dessen Komplexität steigt mit der Detailtiefe der Beziehung. So wird A B niemals mit "hallo meine Ehefrau B" ansprechen. Zur Erlangung derartiger Informationen können Daten wie der gemeinsame Nachname in Kombination mit übereinstimmenden Adressdaten dienen.\\
 Ein weiterer Grund für den erschwerten Umgang mit qualifizierten Beziehungsdaten ist, dass sich diese ändern können. Personen, die beispielsweise Arbeitskollegen waren könnten eine Beziehung eingehen, was zu Fehlern bei Auswertungen führt.\\
-Eine qualifizierte Beziehungsanalyse erfordert einen größeren Aufwand, liefert jedoch bessere Ergebnisse.
+Eine qualifizierte Beziehungsanalyse erfordert einen größeren Aufwand, liefert jedoch bessere Ergebnisse.\\
+Abbildung \ref{img:Beziehungen} ein Beziehungsnetzwerk von weltweiten Führungspositionen. Die Daten wurden aus Nachrichtenberichten ermittelt.
+
+\begin{figure}[h!]
+  \centering
+    \reflectbox{%
+      \includegraphics[width=83.5truemm]{img/Beziehungen}}
+      %\includegraphics[width=175truemm]{img/beziehungen}}
+  \caption{Kommunikationen von Führungspersonen auf Basis von Nachrichten aus dem Jahre 2006. \cite{challanges_in_osint}}
+  \label{img:Beziehungen}
+\end{figure}
 
 \subsection{Ereignisse}
-Um eine Quelle besser nutzen zu können ist es von Vorteil diese einem Ereignis zuordnen zu können. Hierzu ist es wichtig Ereignisse zu erkennen und diese voneinander zu unterscheiden. Ereignisse mit vielen Quellen werden im allgemeinen als wichtig angesehen. Die Erkennung von Dopplungen, wie in Abschnitt \ref{Dopplungen} beschrieben ist hierbei besonders wichtig.\\
+Um eine Quelle besser nutzen zu können ist es von Vorteil diese einem Ereignis zuordnen zu können. Hierzu ist es wichtig Ereignisse zu erkennen und diese voneinander zu unterscheiden. Ereignisse mit vielen Quellen werden im allgemeinen als wichtig angesehen. Die Erkennung von Dopplungen, wie in Abschnitt \ref{sub:Dopplungen} beschrieben ist hierbei besonders wichtig.\\
 Zur Erkennung, ob und wie gut ein Dokument in einen Themenbereich passt werden Texte mit Stichworten versehen. Stichwörter sind Wörter mit dem geringsten Informationsgehalt. Das ganze Dokument wird bei diesem Ansatz als Vektor dargestellt. Jedes Stichwort ist eine Dimension in dem Vektor. Die Werte der Dimension ist die Anzahl, die das Wort vorgekommen ist.\\
 Mit dieser Vorgehensweise wird ein Cluster aus Texten erstellt. Das Dokument im Zentrum des Clusters ist das, für das Themengebiet typischste Dokument.
+
+
+\section{Klassifikatoren}
+Die automatisierte Analyse von Texten ist immer Fehlerbehaftet. Die Fehleranfälligkeit variiert mit der Art der Analyse, ebenso wie der Schwellenwert an zulässigen Fehlern.\\
+Zur besseren Handhabe mit den verschiedenen Zuständen wurden diese in vier Klassen unterteilt. Diese sind in Tabelle \ref{tab:Klassifikator} dargestellt.
+
+\begin{table}[htdp]
+  \caption{\it Klassifikatoren bei der Erkennung}
+  \begin{center}
+    \begin{tabular}{|c|c|c|}\hline
+      					& ist positiv 	& ist negativ \\\hline
+       positiv klassifiziert & true positive (TP) & false positive (FP)\\\hline
+       negativ klassifiziert & false negativ (FN) & true negative (TN)\\	  
+     \hline
+    \end{tabular}
+  \end{center}
+  \label{tab:Klassifikator}
+\end{table}
+
+\subsection{Recall (Erinnerung))}
+Die Erinnerung gibt den Anteil der positiv Objekte an, die positiv klassifiziert wurden. Die Berechnung lautet:
+$$\frac{TP}{(TP+FN)}$$
+
+\subsection{Accuracy (Treffergenauigkeit)}
+Die Treffergenauigkeit gibt den Anteil der korrekt Klassifizierten Objekte an. Dieser errechnet sich wie folgt:
+$$\frac{TP}{(TP+FP)}$$
+
+\subsection{Precision (Präzision)}
+Die Präzision gibt den Anteil der positiv klassifizierten Objekte an, die tatsächlich positiv sind.
+$$\frac{(TP+TN)}{(TP+FP+FN+TN)}$$
+
+\section{menschliche Interaktion}
+Menschliche Interaktion ist im Gegensatz zur maschinellen Auswertung deutlich kostspieliger und wird deshalb maximal gering gehalten. Abhängig von dem Vorhaben sind jedoch nur gewisse Fehlertoleranzen akzeptabel. Häufig sind besonders FP Ergebnisse ein Problem, da sie zur Verfälschung des Endergebnisses führen.\\
+Um dies zu vermeiden wird der Schwellwert der erreicht werden muss um ein Positives Ergebnis zu liefern erhöht. In der Folge steigen dafür die FN Ergebnisse an. Diese sind für eine korrekte Analyse jedoch wenig Problematisch.\\
+Zur Verbesserung der Ergebnisse und einer besseren Erkennung werden geschulte Personen eingesetzt. Diese überprüfen Ergebnisdaten auf ihre Korrektheit. Häufige Fehler sind z.B. Ereignisse, die jährlich auftreten und deshalb von dem System als eigenständiges und nicht als sich wiederholendes Ereignis erkannt werden.
+
+
+\section{Vertrauen und Wahrheit}
+Das wahrscheinlich problematischste Feld von OSINT ist das Vertrauen in Aussagen und die Prüfung dessen Wahrheitsgehalt.\\
+Bei Kommunikationspartner, die sich gut kennen wird häufig ein Teil der Informationen weg gelassen, da sie beim Kommunikationspartner bekannt sind. Dies tritt insbesondere dann auf, wenn ein Kanalwechsel vollzogen wird. Z.B. wenn eine persönliche Kommunikation auf dem digitalen weg fortgeführt wird.\\
+Ein weiteres Problem bei der Validierung von Aussagen sind Übertreibungen. Diese verfälschen Fakten und eine Korrektur ist nur durch den Abgleich mit Referenzquellen möglich.\\
+Eine ebenso große Herausforderung stellen Unwahrheiten und Ironie dar. Sie sind für technische Systeme nahezu nicht zu erkennen. Ein Mensch kann mit ausreichendem Hintergrundwissen diese unter Umständen ausgleichen.\\
+Ein weiteres Problem sind Vorurteile. Diese sind selbst für erfahrene Analysten ein Problem, da sie das Urteilsvermögen negativ beeinflussen.\\
+Um die Wahrheit einer Quelle zu ermitteln kann diese auf Basis ihrer vergangenen Aussagen eingestuft werden. Quellen mit hoher Seriosität bekommen somit eine höhere Gewichtung, sodass das Ergebnis verbessert werden kann.\\
+Es ist zudem hilfreich Quellen in Kategorien zu unterteilen um deren Aussagen unter Berücksichtigung verschiedener Faktoren zu beurteilen. Mögliche Typen sind:
+\begin{itemize}
+	\item unabhängig
+	\item Regierung
+	\item Rebellen
+	\item politisch
+	\item usw.
+\end{itemize}
+Zudem wird häufig dem Bericht ein Typ zugewiesen. Mögliche Typen sind:
+\begin{itemize}
+	\item erste Hand
+	\item vom hören sagen
+	\item Meinung
+	\item Duplikat
+	\item zensiert
+	\item usw.
+\end{itemize}
+
+
+\section{OSINT Wissensbasis}
+Zur erfolgreichen Durchführung von OSINT bedarf es verschiedener Voraussetzungen. Hierzu zählen unter anderem detaillierte Domain Kenntnisse. Für die automatisierte Analyse ist eine Datenbank mit Metadaten der Domain zu erstellen.\\
+Zur effizienten Nutzung ist es wichtig, Frontend Anwendungen bereit zu stellen. Eine dieser Werkzeuge sind:
+\begin{itemize}
+	\item Netminer \cite{netminer}
+	\item Commetrix \cite{commetrix}
+	\item Gephi \cite{gephi}
+	\item Cyc \cite{cyc}
+\end{itemize}
+
+\subsection{Länderprofile}
+Viele Vorkommnisse sind länderübergreifend. Um diese effizient analysieren zu können ist es notwendig jedes Land in Bezug zu seinem Kontext zu betrachten. Hierbei muss die politische, sowie die gesellschaftliche Lage eines Landes beachtet werden. Beispielsweise sind schwere Ausschreitungen in einem Land mit stabiler Wirtschaftslage unwahrscheinlicher und damit von größerer Bedeutung als Ausschreitungen in einem Land in schwieriger Lage.\\
+Die Faktoren, die eine Land, oder eine Region auszeichnen werden als strukturelle Indikatoren bezeichnet.
+
+\subsection{Strukturelle Indikatoren}
+%- quantifiziert sozialpolitische Faktoren
+%- basieren auf verschiedenen statistischen Werten
+%-- Wirtschaftswachstum
+%-- Bildungsgrad
+%-- Lebenserwartung
+%-- Arbeitslosenquote
+%-- usw.
+%- werden zu Faktoren, wie der "Lebensqualität" oder "Konfliktkapazität" zusammengefasst.
+%- ermöglicht Situationen von Ländern zu vergleichen
+
+Strukturelle Indikatoren sind qualifizierte sozialpolitische Faktoren. Diese basieren auf verschiedenen statistischen Werten. Einige davon sind:
+\begin{itemize}
+	\item Wirtschaftswachstum
+	\item Bildungsgrad
+	\item Lebenserwartung
+	\item Arbeitslosenquote
+\end{itemize}
+Um Werte vergleichbar zu halten werden die gleichen Maßstäbe angelegt. So kann zum Beispiel die Pisa Studie \cite{pisa} zum Vergleich des Bildungsgrats europäischer Länder verwendet werden.\\
+Die strukturellen Indikatoren werden zu Faktoren, wie Konfliktkapazität oder Lebensqualität zusammengefasst. Dies dient letztendlich als Basis für einen direkten Vergleich.
+
+\subsection{Aufständische und Terroristen}
+%- Das Führen von Listen über terroristische Gruppen wird zumeist händisch durchgeführt
+%- OSINT kann die Informationsgewinnung durch eine vorfilterung unterstützen.
+
+
+\subsection{Datenbank mit Tupeln}
+%- Liste mit mächtigen Führern und Wirtschaftsbossen
+%- hilft bei der Zuordnung von Ereignissen in einem Land
+
+\subsection{Dynamische Indikatoren}
+%- Analyse von sich häufig ändernden Daten
+%- Bsp.: Opferzahlen im Irak
+
+
+\section{P: Challenges to Automated Allegory}
+
 
 
 \section{Kritik an OSINT}
