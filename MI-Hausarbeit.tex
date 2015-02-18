@@ -35,7 +35,6 @@
 
 %------------------------------------------------------------------------------------------
 \documentclass[twoside,a4paper]{article}
-\usepackage{minfsem}
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{euscript}
 \usepackage[utf8]{inputenc}
@@ -45,6 +44,8 @@
 \usepackage[babel,german=quotes]{csquotes} % Für gute Anführungszeichen
 \usepackage{caption}
 \usepackage{subfig, color}
+\usepackage{minfsem}
+\usepackage{float}
 
 \setcounter{page}{1}
 \ninept
@@ -90,8 +91,10 @@
 %--------------AUTHOR HEADER STARTS -----------------------
 \affiliation{
 \paperauthorA,}% \sthanks{This work was supported by the XYZ Foundation}}
-{\href{http://www.haw-hamburg.de/ti-i}{Hamburg University of Applied Sciences,
-    Dept. Computer Science,} \\ Berliner Tor 7\\ 20099 Hamburg, Germany\\
+%{\href{http://www.haw-hamburg.de/ti-i}{Hamburg University of Applied Sciences,
+%    Dept. Computer Science,} \\ Berliner Tor 7\\ 20099 Hamburg, Germany\\
+{\href{http://www.haw-hamburg.de/ti-i}{Hochschule für Angewandte Wissenschaften Hamburg,
+    Dept. Informatik,} \\ Berliner Tor 7\\ 20099 Hamburg, Germany\\
 {\ttfamily \href{mailto:your.name@haw-hamburg.de}{lennart.karsten@haw-hamburg.de}}
 }
 %-----------------------------------AUTHOR HEADER ENDS------------------------------------------------------
@@ -170,7 +173,7 @@ Wie aus Tabelle~\ref{tab:Vergleich} zu ersehen ist, eignet sich OSINT insbesonde
 
 
 \section{Datenbereinigung}
-Gesammelte OSINT Daten enthalten eine Vielzahl von Fehlern. Hierzu gehören: Unterschiedliche Schreibweise von Wörtern, Dopplungen, sowie Widersprüche. Nach  \cite{data_consolidation_solution} gibt es die folgenden Phasen.
+Gesammelte OSINT Daten enthalten eine Vielzahl von Fehlern. Hierzu gehören: Unterschiedliche Schreibweise von Wörtern, Dopplungen, sowie Widersprüche. Nach Prasad et al.\cite{data_consolidation_solution} gibt es die folgenden Phasen.
 
 \subsection{Untersuchung}
 In dieser Phase werden allgemeine Fehler auf Basis von Querreferenzierung und Plausibilitätsüberprüfung gefunden und entfernt. \\
@@ -199,7 +202,7 @@ Bei vielen Themengebieten ist es zudem von Nöten, eine sprachabhängige Zuordnu
 \noindent Eine thematische Zuordnung kann durch den Einsatz von mehrsprachigen Stichwortlisten geschehen. Bei diesem Ansatz hat jedes bekannte Themengebiet Stichworte, die in einer bestimmten Reihenfolge zu einem gewichteten Ergebnis führen. Hierdurch wird die Wahrscheinlichkeit gemessen, zu der ein Text zu einem Thema gehört.\\
 Alternativ gibt es die Möglichkeit die Themenzugehörigkeit mit Hilfe von linearer Algebra zu ermitteln.
 
-\footnotetext{Dieser wird von Bruce Sterling \cite{sterling2001zeitgeist} als das beschrieben, was eine Personengruppe über ein Thema als wahr annimmt. Diese Wahrheit basiert auf dem erlebten und muss nicht zwangsläufig mit den Fakten übereinstimmen.\\
+\footnotetext{Dieser wird von Bruce Sterling\cite{sterling2001zeitgeist} als das beschrieben, was eine Personengruppe über ein Thema als wahr annimmt. Diese Wahrheit basiert auf dem erlebten und muss nicht zwangsläufig mit den Fakten übereinstimmen.\\
 Bsp.: Die gegenläufige Wahrnehmung Europas und Russlands zu dem Krieg in der Ukraine}
 
 \subsection{Geografische Position}
@@ -211,7 +214,7 @@ Wenn keine derartige Datenquelle verfügbar ist, muss der Aufenthaltsort aus dem
 \subsection{Namen (Named Entity Recognition (NER))}
 Um Texte und Aussagen einer Person zuordnen zu können ist es notwendig Namen in Texten zu erkennen und diese als Identität wieder zu erkennen. Dies wird \enquote{Named Entity Recognition (NER)} genannt. Bei der NER gibt es zwei wesentliche Vorgehensweisen. \\
 Einerseits ist es Möglich Namen anhand von bestehenden Listen zu erkennen und zuzuordnen.\\
-Die andere Möglichkeit ist, Namen anhand von Mustern auszumachen. Z.B. [Anrede] [groß geschrieben] [groß geschrieben] oder [Title] von [Ort]. Bei diesem vorgehen kann eine ungefähre Genauigkeit von 80 Prozent \cite{challanges_in_osint} erreicht werden. Sprachen, die abgesehen von Eigennamen alles klein schreiben wie z.B. Englisch erreichen die besten Erkennungsraten. Sprachen, die Nomen groß schreiben, wie es im Deutschen der Fall ist, erreichen entsprechend schlechtere Ergebnisse. Probleme gibt es bei Sprachen, die keine lateinischen Zeichen verwenden (z.B.: russisch oder chinesisch) und Sprachen, in denen Namen nicht in den Kategorien Vorname und Nachname ausgedrückt werden.
+Die andere Möglichkeit ist, Namen anhand von Mustern auszumachen. Z.B. [Anrede] [groß geschrieben] [groß geschrieben] oder [Title] von [Ort]. Bei diesem vorgehen kann eine ungefähre Genauigkeit von 80 Prozent\cite{challanges_in_osint} erreicht werden. Sprachen, die abgesehen von Eigennamen alles klein schreiben wie z.B. Englisch erreichen die besten Erkennungsraten. Sprachen, die Nomen groß schreiben, wie es im Deutschen der Fall ist, erreichen entsprechend schlechtere Ergebnisse. Probleme gibt es bei Sprachen, die keine lateinischen Zeichen verwenden (z.B.: russisch oder chinesisch) und Sprachen, in denen Namen nicht in den Kategorien Vorname und Nachname ausgedrückt werden.
 
 \subsection{Beziehungen}
 Beziehungen werden in den Kategorien quantitativ und qualifiziert angegeben.\\
@@ -222,12 +225,11 @@ Ein weiterer Grund für den erschwerten Umgang mit qualifizierten Beziehungsdate
 Eine qualifizierte Beziehungsanalyse erfordert einen größeren Aufwand, liefert jedoch bessere Ergebnisse.\\
 Abbildung \ref{img:Beziehungen} ein Beziehungsnetzwerk von weltweiten Führungspositionen. Die Daten wurden aus Nachrichtenberichten ermittelt.
 
-\begin{figure}[h!]
+\begin{figure}[H]
   \centering
-    \reflectbox{%
-      \includegraphics[width=83.5truemm]{img/Beziehungen}}
-      %\includegraphics[width=175truemm]{img/beziehungen}}
-  \caption{Kommunikationen von Führungspersonen auf Basis von Nachrichten aus dem Jahre 2006. \cite{challanges_in_osint}}
+  	\includegraphics[width=83.5truemm]{img/Beziehungen}
+  	%\includegraphics[width=175truemm]{img/beziehungen}
+  \caption{Kommunikationen von Führungspersonen auf Basis von Nachrichten aus dem Jahre 2006.\cite{challanges_in_osint}}
   \label{img:Beziehungen}
 \end{figure}
 
@@ -302,10 +304,10 @@ Zudem wird häufig dem Bericht ein Typ zugewiesen. Mögliche Typen sind:
 Zur erfolgreichen Durchführung von OSINT bedarf es verschiedener Voraussetzungen. Hierzu zählen unter anderem detaillierte Domain Kenntnisse. Für die automatisierte Analyse ist eine Datenbank mit Metadaten der Domain zu erstellen.\\
 Zur effizienten Nutzung ist es wichtig, Frontend Anwendungen bereit zu stellen. Eine dieser Werkzeuge sind:
 \begin{itemize}
-	\item Netminer \cite{netminer}
-	\item Commetrix \cite{commetrix}
-	\item Gephi \cite{gephi}
-	\item Cyc \cite{cyc}
+	\item Netminer\cite{netminer}
+	\item Commetrix\cite{commetrix}
+	\item Gephi\cite{gephi}
+	\item Cyc\cite{cyc}
 \end{itemize}
 
 \subsection{Länderprofile}
@@ -313,16 +315,6 @@ Viele Vorkommnisse sind länderübergreifend. Um diese effizient analysieren zu 
 Die Faktoren, die eine Land, oder eine Region auszeichnen werden als strukturelle Indikatoren bezeichnet.
 
 \subsection{Strukturelle Indikatoren}
-%- quantifiziert sozialpolitische Faktoren
-%- basieren auf verschiedenen statistischen Werten
-%-- Wirtschaftswachstum
-%-- Bildungsgrad
-%-- Lebenserwartung
-%-- Arbeitslosenquote
-%-- usw.
-%- werden zu Faktoren, wie der "Lebensqualität" oder "Konfliktkapazität" zusammengefasst.
-%- ermöglicht Situationen von Ländern zu vergleichen
-
 Strukturelle Indikatoren sind qualifizierte sozialpolitische Faktoren. Diese basieren auf verschiedenen statistischen Werten. Einige davon sind:
 \begin{itemize}
 	\item Wirtschaftswachstum
@@ -330,24 +322,70 @@ Strukturelle Indikatoren sind qualifizierte sozialpolitische Faktoren. Diese bas
 	\item Lebenserwartung
 	\item Arbeitslosenquote
 \end{itemize}
-Um Werte vergleichbar zu halten werden die gleichen Maßstäbe angelegt. So kann zum Beispiel die Pisa Studie \cite{pisa} zum Vergleich des Bildungsgrats europäischer Länder verwendet werden.\\
+Um Werte vergleichbar zu halten werden die gleichen Maßstäbe angelegt. So kann zum Beispiel die Pisa Studie\cite{pisa} zum Vergleich des Bildungsgrats europäischer Länder verwendet werden.\\
 Die strukturellen Indikatoren werden zu Faktoren, wie Konfliktkapazität oder Lebensqualität zusammengefasst. Dies dient letztendlich als Basis für einen direkten Vergleich.
 
+\subsection{Dynamische Indikatoren}
+Dynamische Indikatoren sind Indikatoren, die sich im Gegensatz zu strukturellen Indikatoren häufig ändern. Bestimmte Faktoren sind leicht zu erheben, wie z.B. die Anzahl an Verkehrstoten. Andere Faktoren müssen aus Berichten extrahiert werden, ehe sie genutzt werden können. Diese Werte bilden sich aus der Summe an Vorkommnissen einer Kategorie in einem Bestimmten Zeitrahmen.\\
+Eine Möglichkeit Ereignisse kodiert zu speichern ist das \enquote{Integrated Data for Event Analysis (IDEA)} Framework\cite{idea}.\\
+Ereignisse können nach Listen, wie z.B. von Goldstein\cite{goldstein} im Jahre 1992 erstellt wurden gewertet werden. Die Skala reicht von -10 bis 8,3, wobei -10 einem kriegerischen Akt und 8,3 einer starken militärischen Unterstützung gleich kommt. Die Das Integral über die relevanten Faktoren gibt so den Gefährdungsgrad in einem bestimmten Zeitraum.\\
+Auf Basis dieser Festen Werte und deren Prognose kann ein Frühwarnsystem entwickelt werden, das versucht zukünftige Krisen hervor zu sagen.
+
+\begin{figure}[H]
+  \centering
+  	\includegraphics[width=83.5truemm]{img/earlyWarning}
+  \caption{Konflikt Früherkennung\cite{challanges_in_osint}}
+  \label{img:earlyWarning}
+\end{figure}
+
 \subsection{Aufständische und Terroristen}
-%- Das Führen von Listen über terroristische Gruppen wird zumeist händisch durchgeführt
-%- OSINT kann die Informationsgewinnung durch eine vorfilterung unterstützen.
+Für das auffinden bestimmter Personen ist das Führen entsprechender Listen von großer Bedeutung. Es ist so einfacher, gesuchte Personen in den gesammelten Intellicence Daten wieder zu finden. Solche Listen werden zumeist händisch mit Daten befüllt um Fehler auszuschließen. OSINT kann die Informationsgewinnung durch eine Vorfilterung unterstützen.\\
+Das FBI führt z.B. Listen über gesuchte Verbrecher und Terroristen. Diese sind auf der Webseite\cite{wanted} des FBI einsehbar und können nach belieben durchsucht werden. Mit folgendem Satz wird offen für die Mithilfe an der Ergreifung von Zielpersonen aufgerufen. In manchen Fällen werden zudem Belohnungen für die Ergreifung ausgeschrieben.
+
+\begin{quote}
+\textit{Protect your family, your local community, and the nation by helping the FBI catch wanted terrorists and fugitives. You can also help reunite missing persons of all ages with their loved ones. Rewards are offered in some cases. Use the Search Center below to find specific cases.}
+\end{quote}
 
 
 \subsection{Datenbank mit Tupeln}
-%- Liste mit mächtigen Führern und Wirtschaftsbossen
-%- hilft bei der Zuordnung von Ereignissen in einem Land
-
-\subsection{Dynamische Indikatoren}
-%- Analyse von sich häufig ändernden Daten
-%- Bsp.: Opferzahlen im Irak
+Zur Einordnung von Geschehnissen und der Zuordnung von Aussagen und des Gewicht ist es notwendig eine hierarchische Liste mit mächtigen Personen aus der Politik und Wirtschaft anzulegen.\\
+Es ist somit möglich Aussagen einer Person in Bezug auf dessen Zugehörigkeit einer Partei oder eines Unternehmens zu interpretieren. Die Hierarchie der Person in seiner Organisation gibt Aussage über Gewichtung einer Aussage.\\
+Die Aussage eines angestellten würde in den meisten Fällen als Einzelmeinung gewertet, wohingegen die Aussage eines Mitglieds des Führungsstabes für die Organisation richtungsweisend sein kann.
 
 
-\section{P: Challenges to Automated Allegory}
+\section{Sprachliche Probleme}
+In der Arbeit von Watters\cite{challenges_to_automated_alloegory} werden die verschiedenen Probleme der Auswertung von Sprache thematisiert. Ins besonders die Übersetzung führt zu ungewollten Verfälschungen der ursprünglichen Aussage.
+
+\subsection{allgemein}
+%- in Spezialgebieten wie Medizin machbar
+%- im allgemeinen deutlich schwieriger
+%- Es entsteht ein Informationsverlusst bzw. verfälschung(siehe http://translationparty.com/)
+%- Wortreihnfolge
+Die Auswertung von Texten über die Sprachgrenzen hinweg ist im allgemeinen ein schwieriges Feld. Durch die Übersetzung gehen Informationen verloren, oder bekommen eine andere Bedeutung. Leicht lässt sich dies durch Dienste wie \enquote{Translation Party}\footnotemark nachvollziehen. Ein weiteres Problem stellt die Wortreihenfolge in unterschiedlichen Sprachen dar.\\
+In speziellen Bereichen ist eine Analyse jedoch erheblich einfacher. Dies ist insbesondere dann der Fall, wenn der Themenkomplex durch eine konkrete Sprache geprägt ist. Beispiele sind die Informatik, die größtenteils englische Begriffe verwendet, sowie die Medizin, die in gleichem Maße auf die lateinische Sprache zurück greift.\\
+
+\footnotetext{\url{http://translationparty.com/} übersetzt einen englischen Ausdruck ins japanische und zurück, bis sich die Ergebnisse nicht mehr ändern.}
+
+\subsection{besondere Schwierigkeiten}
+%- Metapher
+%- Gleichniss
+
+
+\subsection{direkte(wörtliche) Übersetzung}
+%- für einzelne Wörter geeignet
+%- nicht für Phrasen
+%- nutzt 2 Wörterbücher
+%- Wörterbücher oft nicht kompatibel
+%- Verfälschungen: Bsp.: fast -> schnell -> quick
+
+
+\subsection{Kontext sensitive Übersetzung}
+%- Erfordert Kontext Kenntniss
+%- komplexer als direkte Übersetzung
+%- Nötig für das Übersetzen von Phrasen
+%1. vorgefärtigte korrekt übersetzte Prasen hinterlegen (transfer functions)[5]
+%2. Sprache abstrahieren und in eine Metasprache übersetzen (interlingual approach)[6]
+%- beide Ansätze sind besser als direkte Übersetzung, aber uneffizienter
 
 
 
