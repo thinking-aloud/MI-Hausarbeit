@@ -29,7 +29,7 @@
 %------------------------------------------------------------------------------------------
 %  !  !  !  !  !  !  !  !  !  !  !  ! user defined variables  !  !  !  !  !  !  !  !  !  !  !  !  !  !
 % Please use these commands to define title and author of the paper:
-\def\papertitle{Herausforderungen bei open source Intelligence (OSINT)}
+\def\papertitle{Herausforderungen bei Open Source Intelligence (OSINT)}
 \def\paperauthorA{Lennart Karsten}
 
 
@@ -357,51 +357,57 @@ Die Aussage eines angestellten würde in den meisten Fällen als Einzelmeinung g
 In der Arbeit von Watters\cite{challenges_to_automated_alloegory} werden die verschiedenen Probleme der Auswertung von Sprache thematisiert. Ins besonders die Übersetzung führt zu ungewollten Verfälschungen der ursprünglichen Aussage.
 
 \subsection{allgemein}
-%- in Spezialgebieten wie Medizin machbar
-%- im allgemeinen deutlich schwieriger
-%- Es entsteht ein Informationsverlusst bzw. verfälschung(siehe http://translationparty.com/)
-%- Wortreihnfolge
-Die Auswertung von Texten über die Sprachgrenzen hinweg ist im allgemeinen ein schwieriges Feld. Durch die Übersetzung gehen Informationen verloren, oder bekommen eine andere Bedeutung. Leicht lässt sich dies durch Dienste wie \enquote{Translation Party}\footnotemark nachvollziehen. Ein weiteres Problem stellt die Wortreihenfolge in unterschiedlichen Sprachen dar.\\
+Die Auswertung von Texten über die Sprachgrenzen hinweg ist im allgemeinen ein schwieriges Feld. Durch die Übersetzung von Sprachen gehen Informationen verloren, oder bekommen eine andere Bedeutung. Leicht lässt sich dies durch Dienste wie \enquote{Translation Party}\footnotemark nachvollziehen. Ein weiteres Problem stellt die Wortreihenfolge in unterschiedlichen Sprachen dar.\\
 In speziellen Bereichen ist eine Analyse jedoch erheblich einfacher. Dies ist insbesondere dann der Fall, wenn der Themenkomplex durch eine konkrete Sprache geprägt ist. Beispiele sind die Informatik, die größtenteils englische Begriffe verwendet, sowie die Medizin, die in gleichem Maße auf die lateinische Sprache zurück greift.\\
 
-\footnotetext{\url{http://translationparty.com/} übersetzt einen englischen Ausdruck ins japanische und zurück, bis sich die Ergebnisse nicht mehr ändern.}
+\footnotetext{\url{http://translationparty.com/} übersetzt einen englischen Ausdruck ins japanische und zurück, bis sich das Ergebnis nicht mehr ändert.}
 
-\subsection{besondere Schwierigkeiten}
-%- Metapher
-%- Gleichniss
-
+\subsection{Metaphern, Gleichnisse und Sprichworte}
+\label{Metaphern}
+Wie die Analyse von Watters zeigt ist insbesondere die Auswertung von Metaphern, Gleichnissen und Sprichworten ein Problem. Alle drei Begriffsgattungen basieren auf einer nahezu exakten Wiedergabe und selbst die Nutzung von Synonymen macht eine Metapher oder ein Gleichnis unverständlich. Zudem ergibt eine solche Wortkonstruktion selbst korrekt übersetzt in der übersetzten Form kein Sinn ergeben. Folgendes Beispiel verdeutlicht dies.\\
+\enquote{Jemand ist noch grün hinter den Ohren sein.} bedeutet grammatikalisch korrekt übersetzt \enquote{Someone is still green behind the ears}. Dennoch würde ein englischer Muttersprachler das Sprichwort nicht erkennen. Korrekt übersetzt müsste das Sprichwort \enquote{Someone is still wet behind the ears} oder \enquote{Someone is half-baked} lauten.
 
 \subsection{direkte(wörtliche) Übersetzung}
-%- für einzelne Wörter geeignet
-%- nicht für Phrasen
-%- nutzt 2 Wörterbücher
-%- Wörterbücher oft nicht kompatibel
-%- Verfälschungen: Bsp.: fast -> schnell -> quick
+\label{direkteUebersetzung}
+Die wörtliche Übersetzung ist die einfachste Art Begriffe in eine andere Sprache zu übersetzen, da hierbei keine Grammatikkenntnisse vorhanden sein müssen. Dies ermöglicht eine besonders einfache Behandlung unter der Nutzung von Wörterbüchern. Geeignet ist diese Art der Übersetzung nur für einzelne Wörter.\\
+Durch die Unabhängigkeit zum Kontext ist diese Art der Übersetzung nicht für ganze Sätze geeignet und selbst bei einzelnen Worten gibt es Probleme. Das Englische Wort \enquote{fast} kann mit \enquote{schnell} übersetzt werden. Schnell kann wiederum mit \enquote{quick} übersetzt werden, wodurch die Bedeutung verfälscht wird.
+
+\subsection{Kontextsensitive Übersetzung}
+Im Gegensatz zu der direkten Übersetzung ist die kontextsensitive Übersetzung erheblich komplexer. Dieses Vorgehen ist jedoch, wie bereits erwähnt, notwendig um Phrasen korrekt zu übersetzen. Hierzu werden zwei primäre Ansätze verfolgt.\\
+Eine Möglichkeit ist es, korrekt übersetzte Phrasen zu hinterlegen. Dies kann ein Großteil, der in Abschnitt \ref{Metaphern} und \ref{direkteUebersetzung} beschriebene Probleme lösen. Der Ansatz nutzt Transferfunktion und erfordert die folgenden drei Schritte:
+\begin{itemize}
+	\item Analyse der Eingabephrase.
+	\item Entwicklung einer Transferfunktion.
+	\item Erstellung einer Darstellung in der Zielsprache.
+\end{itemize}
+Dieser Ansatz hat die Schwäche, dass jede Sprache in jede andere übersetzt werden.\\
+Ein weiterer Möglichkeit ist ein interlinguale Ansatz. Hierbei wird von Sprachen in eine Metasprache abstrahiert. und von dort aus in die Zielsprache übersetzt. Bei diesem Vorgehen ergeben sich lediglich zwei Schritte:
+\begin{itemize}
+	\item Übersetzung in die Metasprache
+	\item Übersetzung von der Metasprache in die Zielsprache
+\end{itemize}
+Der Interlinguale Ansatz bietet den Vorteil, dass jede Sprache nur einmal in die Metasprache übersetzt werden muss und von dort aus in die Zielsprache.\\
+Beide genannte Verfahren sind ineffizienter als die direkte Übersetzung. In der Regel spielt der Faktor der Korrektheit eine übergeordnete Rolle und die Effizienz ist ein Problem mit abnehmender Bedeutung. Dies liegt an der Entwicklung effizienterer Algorithmen und der Relativierung durch \enquote{Moore's law}\cite{mooreslaw}.
 
 
-\subsection{Kontext sensitive Übersetzung}
-%- Erfordert Kontext Kenntniss
-%- komplexer als direkte Übersetzung
-%- Nötig für das Übersetzen von Phrasen
-%1. vorgefärtigte korrekt übersetzte Prasen hinterlegen (transfer functions)[5]
-%2. Sprache abstrahieren und in eine Metasprache übersetzen (interlingual approach)[6]
-%- beide Ansätze sind besser als direkte Übersetzung, aber uneffizienter
-
-
-
-\section{Kritik an OSINT}
-
+\section{Einsatzgebiete von OSINT}
+Open Source Intelligence ist komplex Feld, das von einer Vielzahl von Faktoren abhängt. In den vergangenen Jahren hat dieser Bereich der Datenauswertung, auf Grund von gestiegener Verfügbarkeit von freien Daten, massiv an Popularität gewonnen. OSINT ist zu einem der wichtigsten Informationsquellen für Regierungen, Geheimdienste und Konzernen geworden.\\
+Die Gruppen, die OSINT betreiben verfolgen unterschiedliche Ziele.\\
+Regierungen sind an der besseren Organisation des Öffentlichen Lebens interessiert. In der Arbeit von Prasad et al.\cite{data_consolidation_solution} wird OSINT für die Bedarfsanalyse für den Bau von neuen Schulen verwendet. Regierungen können mit OSINT zudem den Erfolg von Gesetzesvorhaben, sowie die Popularität von politischen Maßnahmen messen.\\
+Geheimdienste Nutzen OSINT für die Verfolgung von Personen im In- und Ausland. Der Bundesnachrichtendienst(BND) besitzt beispielsweise eine eigene Abteilung, die sich ausschließlich mit OSINT beschäftigt. Laut offizieller Webseite\cite{bndOsint} macht OSINT quantitativ den größten Teil der Informationsgewinnung aus.\\
+Firmen nutzen OSINT für verschiedene Zwecke. Es werden Informationen über Mitbewerbern, dem Markt und Kunden gesammelt. Detaillierte  Informationen über den Markt und Mitbewerbern erleichtert die Einführung neuer Produkte. Informationen über Kunden unterstützt das Werben neuer Kunden.
 
 
 \section{Zusammenfassung}
+Die Informationsgewinnung in einer Zeit, der omnipräsenten Präsenz, des Web 2.0 stellt fundamental andere Aufgaben and Datenanalysten. Die Frage, wie und woher Daten genommen werden ist der Frage gewichen, wie die gewünschten Informationen aus Flut an Informationen extrahiert werden können.\\
+Für die Zukunft müssen Werkzeuge entwickelt werden, die Fehlerquellen weiter reduzieren und eine bessere interdisziplinäre Auswertung erlauben. Hierzu ist der verstärkte Einsatz von neuronalen Netzen denkbar.\\
+Dennoch werden die Werkzeuge vermutlich niemals perfekt sein, wodurch menschliche Interaktion immer nötig sein wird. Der Fokus neuer Werkzeuge muss deshalb darauf liegen, Analysten bestmöglich bei ihrer Arbeit zu unterstützen.\\
+Die Tatsache, dass Regierungen, Geheimdienste und Firmen Daten im öffentlich zugänglichen Bereich des Internets Daten nahezu uneingeschränkt mitlesen und auswerten, hat Auswirkungen auf unsere Gesellschaft. Gerade ältere Menschen und Personen aus weniger technischen Branchen sind sich dieser Auswirkung oft nicht bewusst. \\
+Der Autor dieser Arbeit hält daher Aufklärung und einen gesellschaftlichen Diskurs über den Umgang mit solchen technischen Systeme für unvermeidlich. Anderenfalls droht der Verlust jegliche Privatsphäre im Rausch des Fortschritts.
 
 
-%\newpage
 \nocite{*}
 \bibliographystyle{IEEEbib}
 \bibliography{MI-Hausarbeit} % requires file minfsem_tmpl.bib
-
-%\section{Appendix: Margin Check}
-%This section shows the column margins for the text. \bigskip\newline
 
 \end{document}
