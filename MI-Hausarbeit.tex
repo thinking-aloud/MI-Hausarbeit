@@ -44,8 +44,9 @@
 \usepackage[babel,german=quotes]{csquotes} % Für gute Anführungszeichen
 \usepackage{caption}
 \usepackage{subfig, color}
-\usepackage{minfsem}
 \usepackage{float}
+\usepackage{multirow}
+\usepackage{minfsem}
 
 \setcounter{page}{1}
 \ninept
@@ -110,9 +111,9 @@
 \maketitle
 
 \begin{abstract}
-Durch den massiven Anstieg in der Nutzung von Social Media Plattformen, wie Twitter oder Facebook, hat dessen Wichtigkeit für die Gewinnung von \textit{Business intelligence} Informationen in den vergangenen Jahren stark zugenommen. \\
-Die Erhebung von Daten aus solchen, meist frei zugänglichen Quellen ist deutlich kostengünstiger als die Erhebung aus klassischen Quellen. Dies hat dazu geführt, dass Open Source Intelligence (OSINT) mittlerweile die wichtigste Quelle zu Gewinnung von \textit{Business intelligence} ist.\\
-Im Gegensatz zu klassischen Aggregierungsmethoden ist die Beschaffung einer ausreichenden Menge an Daten beim OSINT kein Problem. Probleme Ergeben sich durch große Mengen an Daten, die teilweise widersprüchlich oder falsch sein können. \\
+Durch den massiven Anstieg in der Nutzung von Social Media Plattformen, wie Twitter oder Facebook, hat dessen Wichtigkeit für die Gewinnung von \enquote{Business intelligence} Informationen in den vergangenen Jahren stark zugenommen. \\
+Die Erhebung von Daten aus solchen, meist frei zugänglichen Quellen ist deutlich kostengünstiger als die Erhebung aus klassischen Quellen. Dies hat dazu geführt, dass Open Source Intelligence (OSINT) mittlerweile die wichtigste Quelle zu Gewinnung von \enquote{Business intelligence} Informationen ist.\\
+Im Gegensatz zu klassischen Aggregierungsmethoden ist die Beschaffung einer ausreichenden Menge an Daten beim OSINT kein Problem. Schwierigkeiten ergeben sich durch große Mengen an Daten, die teilweise widersprüchlich oder falsch sein können. \\
 Die Ausarbeitung befasst sich mit der Beschreibung solcher Problemstellungen und nennt verschiedene Lösungsansätze.
 \end{abstract}
 
@@ -149,7 +150,7 @@ Die klassische Datensammlung geschieht mit dem Ziel, bestimmte Informationen her
 \subsection{automatisierte Datensammlung}
 Beim OSINT werden die Daten zum größten Teil maschinell ausgewertet. Möglich ist eine solche Auswertung durch die gesellschaftlichen Veränderungen, die uns das WEB 2.0 gebracht hat. \\
 Seit ein paar Jahren kommunizieren wir mit zunehmendem Maße schriftlich, digital und häufig öffentlich. 
-OSINT macht sich diese Tatsache zu Nutzen. Es erfasst und wertet Daten aus Social Media Plattformen wie Twitter, Facebook und Blogs und anderen frei zugänglichen Quellen aus.\\
+OSINT macht sich diese Tatsache zu Nutzen. Es erfasst und wertet Daten aus Social Media Plattformen wie Twitter, Facebook, Blogs und anderen frei zugänglichen Quellen aus.\\
 Da dies Auswertung automatisiert vorgenommen wird, ist die Verarbeitung von großen Mengen an Daten möglich.
  
 \subsection{Vergleich}
@@ -159,7 +160,7 @@ Wie aus Tabelle~\ref{tab:Vergleich} zu ersehen ist, eignet sich OSINT insbesonde
   \caption{\it Vergleich von klassischer und digitaler Informationsgewinnung mittels OSINT}
   \begin{center}
     \begin{tabular}{|c|c|c|}\hline
-      Bereich & klassisch & OSINT \\\hline
+      \textbf{Bereich} & \textbf{klassisch} & \textbf{OSINT} \\\hline
       Aufwand der Erhebung (einmalig)	& höher & niedriger\\
       Skalierbarkeit der Erhebung 		& schlechter & besser\\
       Aufwand der Auswertung (einmalig) 	& hoch & hoch\\
@@ -176,27 +177,67 @@ Wie aus Tabelle~\ref{tab:Vergleich} zu ersehen ist, eignet sich OSINT insbesonde
 Gesammelte OSINT Daten enthalten eine Vielzahl von Fehlern. Hierzu gehören: Unterschiedliche Schreibweise von Wörtern, Dopplungen, sowie Widersprüche. Nach Prasad et al.\cite{data_consolidation_solution} gibt es die folgenden Phasen.
 
 \subsection{Untersuchung}
-In dieser Phase werden allgemeine Fehler auf Basis von Querreferenzierung und Plausibilitätsüberprüfung gefunden und entfernt. \\
-\textbf{Bsp}. \{Teststrasse, Test Straße, Teststr.\} -> \{Teststrasse, Teststrasse, Teststrasse\}
+In dieser Phase werden allgemeine Fehler auf Basis von Querreferenzierung und Plausibilitätsüberprüfung gefunden und entfernt.
+\begin{table}[htdp]
+  \caption{\it Beispiel für den Prozess der Untersuchung}
+  \begin{center}
+    \begin{tabular}{|c|c|}\hline
+      \textbf{vorher} 	& \textbf{nachher} \\\hline
+      Teststrasse & Teststrasse\\
+      Test Straß & Teststrasse\\
+      Teststr. & Teststrasse\\	  
+     \hline
+    \end{tabular}
+  \end{center}
+\end{table}
 
 \subsection{Standardisierung}
 \label{sub:Standardisierung}
-Anschließend werden die Daten in ein einheitliches Format gebracht um sie effizient durchsuchen zu können. Zudem werden Rechtschreibfehler korrigiert. \\
-\textbf{Bsp}.: \{Teststrasse, Teststrasse, Teststrasse\} -> \{Teststraße, Teststraße, Teststraße\}.
+Anschließend werden die Daten in ein einheitliches Format gebracht um sie effizient durchsuchen zu können. Zudem werden Rechtschreibfehler korrigiert.
+\begin{table}[htdp]
+  \caption{\it Beispiel für den Prozess der Standardisierung}
+  \begin{center}
+    \begin{tabular}{|c|c|}\hline
+      \textbf{vorher} 	& \textbf{nachher} \\\hline
+      Teststrasse & Teststraße\\
+      Teststrasse & Teststraße\\
+      Teststrasse & Teststraße\\	  
+     \hline
+    \end{tabular}
+  \end{center}
+\end{table}
 
 \subsection{Beseitigung von Dopplungen}
 \label{sub:Dopplungen}
-In der 3. Phase werden redundante Daten entfernt. Hierbei werden ähnliche Daten zunächst in einem Block zusammengefasst, wodurch die Effizienz der Abgleichung erheblich erhöht werden kann. Im 2. Schritt werden identische Daten pro Block zusammengefasst.\\
-\textbf{Bsp}.: \{Teststraße, Teststraße, Teststraße\} -> Teststraße
+In der 3. Phase werden redundante Daten entfernt. Hierbei werden ähnliche Daten zunächst in einem Block zusammengefasst, wodurch die Effizienz der Abgleichung erheblich erhöht werden kann. Im 2. Schritt werden identische Daten pro Block zusammengefasst.
+\begin{table}[htdp]
+  \caption{\it Beispiel für Beseitigung von Dopplungen}
+  \begin{center}
+    \begin{tabular}{|c|c|}\hline
+      \textbf{vorher} 	& \textbf{nachher} \\\hline
+      Teststraße & \multirow{3}{*}{Teststraße}\\
+      Teststraße & \\
+      Teststraße & \\	  
+     \hline
+    \end{tabular}
+  \end{center}
+\end{table}
 
 \subsection{Domain Phase}
 Im letzten Schritt werden die gesammelten Daten auf Basis von Domainwissen gefiltert und Themenbereichen zugewiesen. Dies wird im folgenden Abschnitt näher beschrieben.
 
 
 \section{Zuordnung der OSINT Daten}
-Die gesammelten OSINT Daten wurden bereinigt und normalisiert. Um sie effizient nutzen zu können ist es notwendig eine Zuordnung durchzuführen. Dies geschieht auf verschiedenen Ebenen.
+Die gesammelten OSINT Daten wurden bereinigt und normalisiert. Um sie effizient nutzen zu können ist es notwendig eine Zuordnung durchzuführen. Dies geschieht auf verschiedenen Ebenen. Diese sind:
+\begin{itemize}
+  \item Thematische Zuordnung
+  \item Geografische Position
+  \item Namen (Named Entity Recognition (NER))
+  \item Beziehungen
+  \item Ereignisse
+\end{itemize}
 
-\subsection{Thema}
+\subsection{Thematische Zuordnung}
 Bedeutungen von Aussagen können in Bezug auf den Kontext in dem sie verwendet werden variieren. Um eine korrekte Aussage über die Bedeutung einer Aussage, oder eines Textes zu treffen, ist es somit notwendig, den Kontext zu bestimmen.\\
 Bei vielen Themengebieten ist es zudem von Nöten, eine sprachabhängige Zuordnung durchzuführen. Dies ist notwendig, da in verschiedenen Ländern zu einem Themenkomplex ein anderer \enquote{Major consensus narrative}\footnotemark vorherrschen kann.\\
 \noindent Eine thematische Zuordnung kann durch den Einsatz von mehrsprachigen Stichwortlisten geschehen. Bei diesem Ansatz hat jedes bekannte Themengebiet Stichworte, die in einer bestimmten Reihenfolge zu einem gewichteten Ergebnis führen. Hierdurch wird die Wahrscheinlichkeit gemessen, zu der ein Text zu einem Thema gehört.\\
@@ -208,7 +249,7 @@ Bsp.: Die gegenläufige Wahrnehmung Europas und Russlands zu dem Krieg in der Uk
 \subsection{Geografische Position}
 Um eine bessere Thematische Zuordnung durchführen zu können, ist es hilfreich den Aufenthaltsort des Verfassers einer Nachricht zu ermitteln. Dies ist allerdings weniger trivial, als man zunächst annehmen würde.\\
 \noindent Ein Grund hierfür ist, dass Orte häufig abgekürzt werden, oder unterschiedliche Schreibweisen haben. Hamburg kann z.B. HH abgekürzt werden und München wird im englischen \enquote{Munich} geschrieben. Orte müssen daher, wie in \ref{sub:Standardisierung} beschrieben, mit Hilfe einer Fuzzysuche angeglichen werden.\\
-Erschwerend kommt hinzu, dass ein genannter Ort nicht zwangsläufig der Aufenthaltsort des Verfassers sein muss. In einigen Fällen kann der Aufenthaltsort aus Zusatzdaten ausgelesen werden. Dies könnte beispielsweise eine Twitter Nachricht mit Bild, das eine Georeferenzierung beinhaltet sein.\\
+Erschwerend kommt hinzu, dass ein genannter Ort nicht zwangsläufig der Aufenthaltsort des Verfassers sein muss. In einigen Fällen kann der Aufenthaltsort aus Zusatzdaten ausgelesen werden. Dies könnte beispielsweise eine Twitter Nachricht mit Bild, das eine Georeferenzierung in ihren EXIF\footnote{Exchangeable Image File Format(EXIF) sind Metadaten, die u.a. GPS Daten enthalten können.} Daten enthält, sein.\\
 Wenn keine derartige Datenquelle verfügbar ist, muss der Aufenthaltsort aus dem Kontext gelesen werden. Dies erfordert jedoch abhängig von dem Thema ein entsprechend gute thematische Kenntnis. Verbessert werden kann eine derartige geografische Positionsbestimmung bei vielen Nachrichten zum gleichen Thema. 
 
 \subsection{Namen (Named Entity Recognition (NER))}
@@ -218,9 +259,9 @@ Die andere Möglichkeit ist, Namen anhand von Mustern auszumachen. Z.B. [Anrede]
 
 \subsection{Beziehungen}
 Beziehungen werden in den Kategorien quantitativ und qualifiziert angegeben.\\
-quantitative Beziehung sagen aus, wer wen kennt (Bsp. A kennt B). Eine qualitative Aussage über eine Beziehung zu geben ist relativ einfach. Es bedarf jedoch einer umfangreichen Datenmenge und Zusatzinformationen zu den betroffenen Personen um einen Informationsgewinn zu liefern. Wenn diese Voraussetzungen erfüllt sind, entsteht ein Beziehungskonstrukt. Dieses erlaubt Schlüsse darüber, in welchen Kreisen sich eine Person bewegt.\\
+quantitative Beziehung sagen aus, wer wen kennt (Bsp. A kennt B). Eine solche Aussage über eine Beziehung zu geben ist relativ einfach. Es bedarf jedoch einer umfangreichen Datenmenge und Zusatzinformationen zu den betroffenen Personen um einen Informationsgewinn zu liefern. Wenn diese Voraussetzungen erfüllt sind, entsteht ein Beziehungskonstrukt. Dieses erlaubt Schlüsse darüber, in welchen Kreisen sich eine Person bewegt.\\
 Die qualifizierte Beziehung beschreibt die Art und Intensität des Verhältnisses von Personen (Bsp. A ist verheiratet mit B; A ist befreundet mit C). Ähnlich wie bei der Georeferenzierung ist es bei den qualifizierten Beziehungen schwierig korrekte Informationen zu erlangen. \\
-Dies liegt zum einen daran, dass die Daten nur mit einer umfangreichen Textanalyse durchgeführt werden können. Dessen Komplexität steigt mit der Detailtiefe der Beziehung. So wird A B niemals mit "hallo meine Ehefrau B" ansprechen. Zur Erlangung derartiger Informationen können Daten wie der gemeinsame Nachname in Kombination mit übereinstimmenden Adressdaten dienen.\\
+Dies liegt zum einen daran, dass die Daten nur mit einer umfangreichen Textanalyse durchgeführt werden können. Dessen Komplexität steigt mit der Detailtiefe der Beziehung. So wird A B niemals mit \enquote{Hallo meine Ehefrau B} ansprechen. Zur Erlangung derartiger Informationen können Daten wie der gemeinsame Nachname in Kombination mit übereinstimmenden Adressdaten dienen.\\
 Ein weiterer Grund für den erschwerten Umgang mit qualifizierten Beziehungsdaten ist, dass sich diese ändern können. Personen, die beispielsweise Arbeitskollegen waren könnten eine Beziehung eingehen, was zu Fehlern bei Auswertungen führt.\\
 Eine qualifizierte Beziehungsanalyse erfordert einen größeren Aufwand, liefert jedoch bessere Ergebnisse.\\
 Abbildung \ref{img:Beziehungen} ein Beziehungsnetzwerk von weltweiten Führungspositionen. Die Daten wurden aus Nachrichtenberichten ermittelt.
@@ -234,8 +275,10 @@ Abbildung \ref{img:Beziehungen} ein Beziehungsnetzwerk von weltweiten Führungsp
 \end{figure}
 
 \subsection{Ereignisse}
-Um eine Quelle besser nutzen zu können ist es von Vorteil diese einem Ereignis zuordnen zu können. Hierzu ist es wichtig Ereignisse zu erkennen und diese voneinander zu unterscheiden. Ereignisse mit vielen Quellen werden im allgemeinen als wichtig angesehen. Die Erkennung von Dopplungen, wie in Abschnitt \ref{sub:Dopplungen} beschrieben ist hierbei besonders wichtig.\\
-Zur Erkennung, ob und wie gut ein Dokument in einen Themenbereich passt werden Texte mit Stichworten versehen. Stichwörter sind Wörter mit dem geringsten Informationsgehalt. Das ganze Dokument wird bei diesem Ansatz als Vektor dargestellt. Jedes Stichwort ist eine Dimension in dem Vektor. Die Werte der Dimension ist die Anzahl, die das Wort vorgekommen ist.\\
+Um eine Quelle besser nutzen zu können ist es von Vorteil diese einem Ereignis zuordnen zu können. Hierzu ist es wichtig Ereignisse zu erkennen und diese voneinander zu unterscheiden. Ereignisse mit vielen Quellen werden im allgemeinen als wichtig angesehen. Die Erkennung von Dopplungen, wie in Abschnitt \ref{sub:Dopplungen} beschrieben ist hierbei besonders wichtig.\par
+
+Zur Erkennung, ob und wie gut ein Dokument in einen Themenbereich passt werden Texte mit Stichworten versehen. Stichwörter sind Wörter mit dem geringsten Informationsgehalt. Das ganze Dokument wird bei diesem Ansatz als Vektor dargestellt. Jedes Stichwort ist eine Dimension in dem Vektor. Die Werte der Dimension ist die Anzahl, die das Wort vorgekommen ist.\par
+
 Mit dieser Vorgehensweise wird ein Cluster aus Texten erstellt. Das Dokument im Zentrum des Clusters ist das, für das Themengebiet typischste Dokument.
 
 
@@ -256,7 +299,7 @@ Zur besseren Handhabe mit den verschiedenen Zuständen wurden diese in vier Klas
   \label{tab:Klassifikator}
 \end{table}
 
-\subsection{Recall (Erinnerung))}
+\subsection{Recall (Erinnerung)}
 Die Erinnerung gibt den Anteil der positiv Objekte an, die positiv klassifiziert wurden. Die Berechnung lautet:
 $$\frac{TP}{(TP+FN)}$$
 
@@ -322,14 +365,15 @@ Strukturelle Indikatoren sind qualifizierte sozialpolitische Faktoren. Diese bas
 	\item Lebenserwartung
 	\item Arbeitslosenquote
 \end{itemize}
+
 Um Werte vergleichbar zu halten werden die gleichen Maßstäbe angelegt. So kann zum Beispiel die Pisa Studie\cite{pisa} zum Vergleich des Bildungsgrats europäischer Länder verwendet werden.\\
 Die strukturellen Indikatoren werden zu Faktoren, wie Konfliktkapazität oder Lebensqualität zusammengefasst. Dies dient letztendlich als Basis für einen direkten Vergleich.
 
 \subsection{Dynamische Indikatoren}
-Dynamische Indikatoren sind Indikatoren, die sich im Gegensatz zu strukturellen Indikatoren häufig ändern. Bestimmte Faktoren sind leicht zu erheben, wie z.B. die Anzahl an Verkehrstoten. Andere Faktoren müssen aus Berichten extrahiert werden, ehe sie genutzt werden können. Diese Werte bilden sich aus der Summe an Vorkommnissen einer Kategorie in einem Bestimmten Zeitrahmen.\\
+Dynamische Indikatoren sind Größen, die sich im Gegensatz zu strukturellen Indikatoren häufig ändern. Bestimmte Faktoren sind leicht zu erheben, wie z.B. die Anzahl an Verkehrstoten. Andere Faktoren müssen aus Berichten extrahiert werden, ehe sie genutzt werden können. Diese Werte bilden sich aus der Summe an Vorkommnissen einer Kategorie in einem Bestimmten Zeitrahmen.\\
 Eine Möglichkeit Ereignisse kodiert zu speichern ist das \enquote{Integrated Data for Event Analysis (IDEA)} Framework\cite{idea}.\\
-Ereignisse können nach Listen, wie z.B. von Goldstein\cite{goldstein} im Jahre 1992 erstellt wurden gewertet werden. Die Skala reicht von -10 bis 8,3, wobei -10 einem kriegerischen Akt und 8,3 einer starken militärischen Unterstützung gleich kommt. Die Das Integral über die relevanten Faktoren gibt so den Gefährdungsgrad in einem bestimmten Zeitraum.\\
-Auf Basis dieser Festen Werte und deren Prognose kann ein Frühwarnsystem entwickelt werden, das versucht zukünftige Krisen hervor zu sagen.
+Ereignisse können nach Listen, (z.B. von Goldstein\cite{goldstein} aus dem Jahre 1992) bewertet werden. Die Skala reicht von -10 bis 8,3, wobei -10 einem kriegerischen Akt und 8,3 einer starken militärischen Unterstützung gleich kommt. Das Integral über die relevanten Faktoren gibt so den Gefährdungsgrad in einem bestimmten Zeitraum an.\\
+Auf Basis dieser Festen Werte und deren Prognose kann ein Frühwarnsystem entwickelt werden, das versucht zukünftige Krisen hervor zu sagen (siehe Abbildung \ref{img:earlyWarning}).
 
 \begin{figure}[H]
   \centering
@@ -339,7 +383,7 @@ Auf Basis dieser Festen Werte und deren Prognose kann ein Frühwarnsystem entwic
 \end{figure}
 
 \subsection{Aufständische und Terroristen}
-Für das auffinden bestimmter Personen ist das Führen entsprechender Listen von großer Bedeutung. Es ist so einfacher, gesuchte Personen in den gesammelten Intellicence Daten wieder zu finden. Solche Listen werden zumeist händisch mit Daten befüllt um Fehler auszuschließen. OSINT kann die Informationsgewinnung durch eine Vorfilterung unterstützen.\\
+Für das auffinden bestimmter Personen ist das Führen entsprechender Listen von großer Bedeutung. Es ist so einfacher, gesuchte Personen in den gesammelten Intellicence Daten wieder zu finden. Solche Listen werden zumeist händisch mit Daten befüllt, um Fehler auszuschließen. OSINT kann die Informationsgewinnung durch eine Vorfilterung unterstützen.\\
 Das FBI führt z.B. Listen über gesuchte Verbrecher und Terroristen. Diese sind auf der Webseite\cite{wanted} des FBI einsehbar und können nach belieben durchsucht werden. Mit folgendem Satz wird offen für die Mithilfe an der Ergreifung von Zielpersonen aufgerufen. In manchen Fällen werden zudem Belohnungen für die Ergreifung ausgeschrieben.
 
 \begin{quote}
@@ -348,7 +392,7 @@ Das FBI führt z.B. Listen über gesuchte Verbrecher und Terroristen. Diese sind
 
 
 \subsection{Datenbank mit Tupeln}
-Zur Einordnung von Geschehnissen und der Zuordnung von Aussagen und des Gewicht ist es notwendig eine hierarchische Liste mit mächtigen Personen aus der Politik und Wirtschaft anzulegen.\\
+Zur Einordnung von Geschehnissen und der Zuordnung von Aussagen und dessen Gewichtung, ist es notwendig eine hierarchische Liste mit mächtigen Personen aus der Politik und Wirtschaft anzulegen.\\
 Es ist somit möglich Aussagen einer Person in Bezug auf dessen Zugehörigkeit einer Partei oder eines Unternehmens zu interpretieren. Die Hierarchie der Person in seiner Organisation gibt Aussage über Gewichtung einer Aussage.\\
 Die Aussage eines angestellten würde in den meisten Fällen als Einzelmeinung gewertet, wohingegen die Aussage eines Mitglieds des Führungsstabes für die Organisation richtungsweisend sein kann.
 
@@ -356,7 +400,7 @@ Die Aussage eines angestellten würde in den meisten Fällen als Einzelmeinung g
 \section{Sprachliche Probleme}
 In der Arbeit von Watters\cite{challenges_to_automated_alloegory} werden die verschiedenen Probleme der Auswertung von Sprache thematisiert. Ins besonders die Übersetzung führt zu ungewollten Verfälschungen der ursprünglichen Aussage.
 
-\subsection{allgemein}
+\subsection{Allgemein}
 Die Auswertung von Texten über die Sprachgrenzen hinweg ist im allgemeinen ein schwieriges Feld. Durch die Übersetzung von Sprachen gehen Informationen verloren, oder bekommen eine andere Bedeutung. Leicht lässt sich dies durch Dienste wie \enquote{Translation Party}\footnotemark nachvollziehen. Ein weiteres Problem stellt die Wortreihenfolge in unterschiedlichen Sprachen dar.\\
 In speziellen Bereichen ist eine Analyse jedoch erheblich einfacher. Dies ist insbesondere dann der Fall, wenn der Themenkomplex durch eine konkrete Sprache geprägt ist. Beispiele sind die Informatik, die größtenteils englische Begriffe verwendet, sowie die Medizin, die in gleichem Maße auf die lateinische Sprache zurück greift.\\
 
@@ -365,7 +409,7 @@ In speziellen Bereichen ist eine Analyse jedoch erheblich einfacher. Dies ist in
 \subsection{Metaphern, Gleichnisse und Sprichworte}
 \label{Metaphern}
 Wie die Analyse von Watters zeigt ist insbesondere die Auswertung von Metaphern, Gleichnissen und Sprichworten ein Problem. Alle drei Begriffsgattungen basieren auf einer nahezu exakten Wiedergabe und selbst die Nutzung von Synonymen macht eine Metapher oder ein Gleichnis unverständlich. Zudem ergibt eine solche Wortkonstruktion selbst korrekt übersetzt in der übersetzten Form kein Sinn ergeben. Folgendes Beispiel verdeutlicht dies.\\
-\enquote{Jemand ist noch grün hinter den Ohren sein.} bedeutet grammatikalisch korrekt übersetzt \enquote{Someone is still green behind the ears}. Dennoch würde ein englischer Muttersprachler das Sprichwort nicht erkennen. Korrekt übersetzt müsste das Sprichwort \enquote{Someone is still wet behind the ears} oder \enquote{Someone is half-baked} lauten.
+\enquote{Jemand ist noch grün hinter den Ohren} bedeutet grammatikalisch korrekt übersetzt \enquote{Someone is still green behind the ears}. Dennoch würde ein englischer Muttersprachler das Sprichwort nicht erkennen. Korrekt übersetzt müsste das Sprichwort \enquote{Someone is still wet behind the ears} oder \enquote{Someone is half-baked} lauten.
 
 \subsection{direkte(wörtliche) Übersetzung}
 \label{direkteUebersetzung}
@@ -380,18 +424,18 @@ Eine Möglichkeit ist es, korrekt übersetzte Phrasen zu hinterlegen. Dies kann 
 	\item Entwicklung einer Transferfunktion.
 	\item Erstellung einer Darstellung in der Zielsprache.
 \end{itemize}
-Dieser Ansatz hat die Schwäche, dass jede Sprache in jede andere übersetzt werden.\\
+Dieser Ansatz hat die Schwäche, dass jede Sprache in jede andere übersetzt werden muss.\\
 Ein weiterer Möglichkeit ist ein interlinguale Ansatz. Hierbei wird von Sprachen in eine Metasprache abstrahiert. und von dort aus in die Zielsprache übersetzt. Bei diesem Vorgehen ergeben sich lediglich zwei Schritte:
 \begin{itemize}
 	\item Übersetzung in die Metasprache
 	\item Übersetzung von der Metasprache in die Zielsprache
 \end{itemize}
 Der Interlinguale Ansatz bietet den Vorteil, dass jede Sprache nur einmal in die Metasprache übersetzt werden muss und von dort aus in die Zielsprache.\\
-Beide genannte Verfahren sind ineffizienter als die direkte Übersetzung. In der Regel spielt der Faktor der Korrektheit eine übergeordnete Rolle und die Effizienz ist ein Problem mit abnehmender Bedeutung. Dies liegt an der Entwicklung effizienterer Algorithmen und der Relativierung durch \enquote{Moore's law}\cite{mooreslaw}.
+Beide genannte Verfahren sind ineffizienter als die direkte Übersetzung. In der Regel spielt der Faktor, der Korrektheit eine übergeordnete Rolle und die Effizienz ist ein Problem von abnehmender Bedeutung. Dies liegt an der Entwicklung effizienterer Algorithmen und der Relativierung durch \enquote{Moore's law}\cite{mooreslaw}.
 
 
 \section{Einsatzgebiete von OSINT}
-Open Source Intelligence ist komplex Feld, das von einer Vielzahl von Faktoren abhängt. In den vergangenen Jahren hat dieser Bereich der Datenauswertung, auf Grund von gestiegener Verfügbarkeit von freien Daten, massiv an Popularität gewonnen. OSINT ist zu einem der wichtigsten Informationsquellen für Regierungen, Geheimdienste und Konzernen geworden.\\
+Open Source Intelligence ist ein komplexes Feld, dass von einer Vielzahl von Faktoren abhängt. In den vergangenen Jahren hat dieser Bereich der Datenauswertung, auf Grund von gestiegener Verfügbarkeit von freien Daten, massiv an Popularität gewonnen. OSINT ist zu einem der wichtigsten Informationsquellen für Regierungen, Geheimdienste und Konzernen geworden.\\
 Die Gruppen, die OSINT betreiben verfolgen unterschiedliche Ziele.\\
 Regierungen sind an der besseren Organisation des Öffentlichen Lebens interessiert. In der Arbeit von Prasad et al.\cite{data_consolidation_solution} wird OSINT für die Bedarfsanalyse für den Bau von neuen Schulen verwendet. Regierungen können mit OSINT zudem den Erfolg von Gesetzesvorhaben, sowie die Popularität von politischen Maßnahmen messen.\\
 Geheimdienste Nutzen OSINT für die Verfolgung von Personen im In- und Ausland. Der Bundesnachrichtendienst(BND) besitzt beispielsweise eine eigene Abteilung, die sich ausschließlich mit OSINT beschäftigt. Laut offizieller Webseite\cite{bndOsint} macht OSINT quantitativ den größten Teil der Informationsgewinnung aus.\\
@@ -399,10 +443,10 @@ Firmen nutzen OSINT für verschiedene Zwecke. Es werden Informationen über Mitb
 
 
 \section{Zusammenfassung}
-Die Informationsgewinnung in einer Zeit, der omnipräsenten Präsenz, des Web 2.0 stellt fundamental andere Aufgaben and Datenanalysten. Die Frage, wie und woher Daten genommen werden ist der Frage gewichen, wie die gewünschten Informationen aus Flut an Informationen extrahiert werden können.\\
+Die Informationsgewinnung in einer Zeit, der omnipräsenten Präsenz, des Web 2.0 stellt fundamental andere Aufgaben and Datenanalysten. Die Frage, wie und woher Daten genommen werden, ist der Frage gewichen, wie die gewünschten Informationen aus Flut an Informationen extrahiert werden können.\\
 Für die Zukunft müssen Werkzeuge entwickelt werden, die Fehlerquellen weiter reduzieren und eine bessere interdisziplinäre Auswertung erlauben. Hierzu ist der verstärkte Einsatz von neuronalen Netzen denkbar.\\
 Dennoch werden die Werkzeuge vermutlich niemals perfekt sein, wodurch menschliche Interaktion immer nötig sein wird. Der Fokus neuer Werkzeuge muss deshalb darauf liegen, Analysten bestmöglich bei ihrer Arbeit zu unterstützen.\\
-Die Tatsache, dass Regierungen, Geheimdienste und Firmen Daten im öffentlich zugänglichen Bereich des Internets Daten nahezu uneingeschränkt mitlesen und auswerten, hat Auswirkungen auf unsere Gesellschaft. Gerade ältere Menschen und Personen aus weniger technischen Branchen sind sich dieser Auswirkung oft nicht bewusst. \\
+Die Tatsache, dass Regierungen, Geheimdienste und Firmen, Daten im öffentlich zugänglichen Bereich des Internets, nahezu uneingeschränkt mitlesen und auswerten, hat Auswirkungen auf unsere Gesellschaft. Gerade ältere Menschen und Personen aus weniger technischen Branchen sind sich dieser Auswirkung oft nicht bewusst. \\
 Der Autor dieser Arbeit hält daher Aufklärung und einen gesellschaftlichen Diskurs über den Umgang mit solchen technischen Systeme für unvermeidlich. Anderenfalls droht der Verlust jegliche Privatsphäre im Rausch des Fortschritts.
 
 
